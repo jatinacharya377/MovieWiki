@@ -15,8 +15,12 @@ interface MovieDbApi {
         @Path("movie_id") id: String,
         @Query("api_key") api_key: String
     ): Single<MovieDetails>
+
     @GET("movie/popular")
-    fun getPopularMovies(@Query("api_key") api_key: String): Single<PopularMovieResults>
+    fun getPopularMovies(
+        @Query("api_key") api_key: String
+    ): Single<PopularMovieResults>
+
     @GET("movie/now_playing")
     fun getTrendingMovies(
         @Query("api_key") api_key: String,
