@@ -1,7 +1,6 @@
 package com.movie.moviewiki.view.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.movie.moviewiki.R
-import com.movie.moviewiki.model.PopularMovie
+import com.movie.moviewiki.model.popular.PopularMovie
 
 class PopularMoviesAdapter(
     private val context: Context,
@@ -18,8 +17,7 @@ class PopularMoviesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularMoviesViewHolder {
 
-        val view: View =
-            LayoutInflater.from(context).inflate(R.layout.layout_popular_movies, parent, false)
+        val view: View = LayoutInflater.from(context).inflate(R.layout.layout_popular_movies, parent, false)
         return PopularMoviesViewHolder(view)
     }
 

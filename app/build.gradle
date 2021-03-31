@@ -39,6 +39,7 @@ def lifeCycleExtensionsVersion = '2.2.0'
 def retrofitVersion = '2.9.0'
 def rxJavaVersion = '2.0.1'
 def supportVersion = '29.0.0'
+def swipeRefreshLayoutVersion = '1.1.0'
 
 dependencies {
 
@@ -70,4 +71,6 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
     //life cycle extensions dependency
     implementation "android.arch.lifecycle:extensions:$lifeCycleExtensionsVersion"
+    //swipe refresh layout dependency
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshLayoutVersion"
 }

@@ -1,4 +1,4 @@
-package com.movie.moviewiki.model
+package com.movie.moviewiki.model.popular
 
 import com.google.gson.annotations.SerializedName
 

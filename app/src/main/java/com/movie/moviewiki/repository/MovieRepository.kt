@@ -1,29 +1,34 @@
 package com.movie.moviewiki.repository
 
-import com.movie.moviewiki.api.MovieDbApi
 import com.movie.moviewiki.api.MoviesService
-import com.movie.moviewiki.model.PopularMovieResults
-import com.movie.moviewiki.model.TrendingMovieResults
+import com.movie.moviewiki.di.DaggerApiComponent
+import com.movie.moviewiki.model.MovieDetails
+import com.movie.moviewiki.model.popular.PopularMovieResults
+import com.movie.moviewiki.model.trending.TrendingMovieResults
 import io.reactivex.Single
+import javax.inject.Inject
 
-class MovieRepository(private val api_key: String) {
+class MovieRepository {
 
-    private lateinit var movieDbApi: MovieDbApi
-    private lateinit var moviesService: MoviesService
+    @Inject
+    lateinit var moviesService: MoviesService
 
-    fun createApi() {
-
-        moviesService = MoviesService()
-        movieDbApi = moviesService.getRetrofit().create(MovieDbApi::class.java)
+    init {
+        DaggerApiComponent.create().inject(this)
     }
 
-    fun getPopularMovies(): Single<PopularMovieResults> {
+    fun getMovieDetails(id: String, api_key: String): Single<MovieDetails> {
 
-        return movieDbApi.getPopularMovies(api_key)
+        return moviesService.api.getMovieDetails(id, api_key)
     }
 
-    fun getTrendingMovies(page_no: Int): Single<TrendingMovieResults> {
+    fun getPopularMovies(api_key: String): Single<PopularMovieResults> {
 
-        return movieDbApi.getTrendingMovies(api_key, page_no)
+        return moviesService.api.getPopularMovies(api_key)
+    }
+
+    fun getTrendingMovies(api_key: String, pageNo: Int): Single<TrendingMovieResults> {
+
+        return moviesService.api.getTrendingMovies(api_key, pageNo)
     }
 }

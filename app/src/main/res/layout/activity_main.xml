@@ -93,7 +93,7 @@
     </ProgressBar>
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView2"
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="70dp"
@@ -128,7 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
-                android:nestedScrollingEnabled="false"
+                android:nestedScrollingEnabled="true"
                 android:paddingBottom="10dp"
                 android:paddingEnd="10dp"
                 tools:ignore="RtlSymmetry">
