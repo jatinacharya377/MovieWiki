@@ -15,12 +15,12 @@ import com.movie.moviewiki.model.trending.TrendingMovie
 import com.movie.moviewiki.utils.HorizontalMarginItemDecoration
 import com.movie.moviewiki.view.adapters.PopularMoviesAdapter
 import com.movie.moviewiki.view.adapters.TrendingMoviesAdapter
-import com.movie.moviewiki.viewmodel.MovieViewModel
+import com.movie.moviewiki.viewmodel.TMDBViewModel
 
 class MainActivity : AppCompatActivity(), TrendingMoviesAdapter.TrendingMovieListener {
 
     private lateinit var trendingMoviesList: ArrayList<TrendingMovie>
-    private lateinit var movieViewModel: MovieViewModel
+    private lateinit var tmdbViewModel: TMDBViewModel
     private lateinit var nestedScrollView: NestedScrollView
     private lateinit var popularMoviesAdapter: PopularMoviesAdapter
     private lateinit var loadingProgressBar: ProgressBar
@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity(), TrendingMoviesAdapter.TrendingMovieLis
     private fun initializeViews() {
 
         loadingProgressBar = findViewById(R.id.loadingProgressBar)
-        movieViewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
-        movieViewModel.init(getString(R.string.api_key))
+        tmdbViewModel = ViewModelProviders.of(this).get(TMDBViewModel::class.java)
+        tmdbViewModel.init(getString(R.string.api_key))
         nestedScrollView = findViewById(R.id.nestedScrollView)
         popularMoviesViewPager = findViewById(R.id.popularMoviesViewPager)
         trendingMoviesList = ArrayList()
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity(), TrendingMoviesAdapter.TrendingMovieLis
 
     private fun refreshTheAdapter() {
 
-        movieViewModel.getTrendingMovies(pageNo).observe(this@MainActivity, { trendingMoviesList ->
+        tmdbViewModel.getTrendingMovies(pageNo).observe(this@MainActivity, { trendingMoviesList ->
 
             trendingMoviesAdapter.updateDataSet(trendingMoviesList)
         })
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity(), TrendingMoviesAdapter.TrendingMovieLis
         setContentView(R.layout.activity_main)
 
         initializeViews()
-        movieViewModel.getPopularMovies().observe(this, { popularMoviesList ->
+        tmdbViewModel.getPopularMovies().observe(this, { popularMoviesList ->
 
             popularMoviesAdapter = PopularMoviesAdapter(this@MainActivity, popularMoviesList)
             loadingProgressBar.visibility = View.GONE
@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity(), TrendingMoviesAdapter.TrendingMovieLis
             popularMoviesViewPager.setCurrentItem(1, true)
         })
         refreshTheAdapter()
-        nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+        nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, oldScrollY ->
 
             if (v != null) {
 

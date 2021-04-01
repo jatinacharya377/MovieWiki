@@ -10,23 +10,22 @@ import com.movie.moviewiki.model.popular.PopularMovie
 import com.movie.moviewiki.model.popular.PopularMovieResults
 import com.movie.moviewiki.model.trending.TrendingMovie
 import com.movie.moviewiki.model.trending.TrendingMovieResults
-import com.movie.moviewiki.repository.MovieRepository
+import com.movie.moviewiki.repository.TMDBRepository
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-class MovieViewModel: ViewModel() {
+class TMDBViewModel: ViewModel() {
 
     @Inject
-    lateinit var movieRepository: MovieRepository
+    lateinit var tmdbRepository: TMDBRepository
     private lateinit var trendingMoviesList: MutableLiveData<List<TrendingMovie>>
     private lateinit var apiKey: String
     private val disposable = CompositeDisposable()
     private val movieDetails = MutableLiveData<MovieDetails>()
     private val popularMoviesList = MutableLiveData<List<PopularMovie>>()
-
 
     init {
         DaggerApiComponent.create().inject(this)
@@ -35,7 +34,7 @@ class MovieViewModel: ViewModel() {
     fun getMovieDetails(id: String): LiveData<MovieDetails> {
 
         disposable.add(
-            movieRepository.getMovieDetails(id, apiKey)
+            tmdbRepository.getMovieDetails(id, apiKey)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object: DisposableSingleObserver<MovieDetails>() {
@@ -58,7 +57,7 @@ class MovieViewModel: ViewModel() {
     fun getPopularMovies(): LiveData<List<PopularMovie>> {
 
         disposable.add(
-            movieRepository.getPopularMovies(apiKey)
+            tmdbRepository.getPopularMovies(apiKey)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object: DisposableSingleObserver<PopularMovieResults>() {
@@ -82,7 +81,7 @@ class MovieViewModel: ViewModel() {
 
         trendingMoviesList = MutableLiveData<List<TrendingMovie>>()
         disposable.add(
-            movieRepository.getTrendingMovies(apiKey, pageNo)
+            tmdbRepository.getTrendingMovies(apiKey, pageNo)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object: DisposableSingleObserver<TrendingMovieResults>() {

@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieWiki">
         <activity
-            android:name=".view.activities.MovieDetailsActivity">
+            android:name=".view.activities.MovieDetailsActivity"
+            android:theme="@style/Theme.MovieWiki.MovieDetailsActivityTheme">
 
         </activity>
         <activity

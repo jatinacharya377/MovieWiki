@@ -1,8 +1,8 @@
 package com.movie.moviewiki.di
 
-import com.movie.moviewiki.api.MovieDbApi
-import com.movie.moviewiki.api.MoviesService
-import com.movie.moviewiki.repository.MovieRepository
+import com.movie.moviewiki.api.TMDBApi
+import com.movie.moviewiki.api.TMDBService
+import com.movie.moviewiki.repository.TMDBRepository
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -15,25 +15,25 @@ class ApiModule {
     private val baseUrl = "https://api.themoviedb.org/3/"
 
     @Provides
-    fun getMovieDbApi(): MovieDbApi {
+    fun getTMDBApi(): TMDBApi {
 
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
-            .create(MovieDbApi::class.java)
+            .create(TMDBApi::class.java)
     }
 
     @Provides
-    fun getMoviesService(): MoviesService {
+    fun getTMDBService(): TMDBService {
 
-        return MoviesService()
+        return TMDBService()
     }
 
     @Provides
-    fun getMovieRepository(): MovieRepository {
+    fun getTMDBRepository(): TMDBRepository {
 
-        return MovieRepository()
+        return TMDBRepository()
     }
 }

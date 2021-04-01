@@ -20,9 +20,8 @@ fun getProgressDrawable(context: Context): CircularProgressDrawable {
     }
 }
 
-fun ImageView.loadImage(posterUrl: String?, progressDrawable: CircularProgressDrawable) {
+fun ImageView.loadImage(url: String?, progressDrawable: CircularProgressDrawable) {
 
-    val url = "https://image.tmdb.org/t/p/w500" + posterUrl
     val options = RequestOptions()
         .placeholder(progressDrawable)
         .error(R.mipmap.ic_launcher_round)

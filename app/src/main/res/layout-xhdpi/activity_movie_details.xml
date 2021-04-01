@@ -20,7 +20,7 @@
         android:id="@+id/relativeLayout1"
         android:layout_width="match_parent"
         android:layout_height="380dp"
-        android:background="@color/blue_gray">
+        android:background="@color/blue_gray_500">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/backButtonCardView"
@@ -36,8 +36,8 @@
             app:contentPadding="3dp">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:contentDescription="@string/hamburger_icon"
                 android:src="@drawable/icon_back">
 
@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/poppins"
             android:text="@string/movies"
             android:textColor="@color/white"

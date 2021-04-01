@@ -66,13 +66,14 @@ class TrendingMoviesAdapter(
     @RequiresApi(Build.VERSION_CODES.M)
     class TrendingMoviesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val trendingMoviesCardView: CardView = itemView.findViewById(R.id.trendingMoviesCardView)
-        val trendingMoviesImage: ImageView = itemView.findViewById(R.id.trendingMoviesImage)
         private val progressDrawable = getProgressDrawable(itemView.context)
+        private val trendingMoviesImage: ImageView = itemView.findViewById(R.id.trendingMoviesImage)
+        val trendingMoviesCardView: CardView = itemView.findViewById(R.id.trendingMoviesCardView)
 
         fun bind(trendingMovie: TrendingMovie) {
 
-            trendingMoviesImage.loadImage(trendingMovie.posterUrl, progressDrawable)
+            val url = "https://image.tmdb.org/t/p/w500" + trendingMovie.posterUrl
+            trendingMoviesImage.loadImage(url, progressDrawable)
         }
     }
 }

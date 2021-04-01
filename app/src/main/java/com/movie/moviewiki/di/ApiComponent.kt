@@ -1,14 +1,14 @@
 package com.movie.moviewiki.di
 
-import com.movie.moviewiki.api.MoviesService
-import com.movie.moviewiki.repository.MovieRepository
-import com.movie.moviewiki.viewmodel.MovieViewModel
+import com.movie.moviewiki.api.TMDBService
+import com.movie.moviewiki.repository.TMDBRepository
+import com.movie.moviewiki.viewmodel.TMDBViewModel
 import dagger.Component
 
 @Component(modules = [ApiModule::class])
 interface ApiComponent {
 
-    fun inject(service: MoviesService)
-    fun inject(repository: MovieRepository)
-    fun inject(viewModel: MovieViewModel)
+    fun inject(service: TMDBService)
+    fun inject(repository: TMDBRepository)
+    fun inject(viewModel: TMDBViewModel)
 }

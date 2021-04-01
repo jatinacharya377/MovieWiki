@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.movie.moviewiki.R
 import com.movie.moviewiki.model.Genres
 import com.movie.moviewiki.view.adapters.GenreAdapter
-import com.movie.moviewiki.viewmodel.MovieViewModel
+import com.movie.moviewiki.viewmodel.TMDBViewModel
 
 class MovieDetailsActivity : AppCompatActivity() {
 
@@ -26,7 +26,7 @@ class MovieDetailsActivity : AppCompatActivity() {
     private lateinit var ratingLayout: LinearLayout
     private lateinit var genreList: ArrayList<Genres>
     private lateinit var loadingProgressBar: ProgressBar
-    private lateinit var movieViewModel: MovieViewModel
+    private lateinit var tmdbViewModel: TMDBViewModel
     private lateinit var movieRatingBar: RatingBar
     private lateinit var genreRecycleView: RecyclerView
     private lateinit var id: String
@@ -95,8 +95,8 @@ class MovieDetailsActivity : AppCompatActivity() {
         loadingProgressBar = findViewById(R.id.loadingProgressBar)
         movieDetailsLayout = findViewById(R.id.movieDetailsLayout)
         moviePosterCardView = findViewById(R.id.moviePosterCardView)
-        movieViewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
-        movieViewModel.init(getString(R.string.api_key))
+        tmdbViewModel = ViewModelProviders.of(this).get(TMDBViewModel::class.java)
+        tmdbViewModel.init(getString(R.string.api_key))
         movieNameTextView = findViewById(R.id.movieNameTextView)
         moviePoster = findViewById(R.id.moviePoster)
         movieRatingBar = findViewById(R.id.movieRatingBar)
@@ -125,7 +125,7 @@ class MovieDetailsActivity : AppCompatActivity() {
 
         initializeViews()
         backButtonCardView.setOnClickListener { finish() }
-        movieViewModel.getMovieDetails(id).observe(this, { movieDetails ->
+        tmdbViewModel.getMovieDetails(id).observe(this, { movieDetails ->
 
             genreAdapter.updateDataSet(movieDetails.genresList as ArrayList<Genres>)
             setVisibility()
